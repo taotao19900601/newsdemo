@@ -5,5 +5,5 @@ package com.mt.newsdemo.main.presenter;
  */
 
 public interface MainPresenter {
-
+    public void switchNavigation(int id);
 }
