@@ -14,6 +14,7 @@ import com.mt.newsdemo.R;
 import com.mt.newsdemo.main.presenter.MainPresenter;
 import com.mt.newsdemo.main.presenter.MainPresenterImpl;
 import com.mt.newsdemo.main.view.MainView;
+import com.mt.newsdemo.news.widget.NewsFragment;
 import com.mt.newsdemo.utils.LogUtil;
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switch2News() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new NewsFragment()).commit();
         LogUtil.e(TAG, "switch2News");
     }
 
