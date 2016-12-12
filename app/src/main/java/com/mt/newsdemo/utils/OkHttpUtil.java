@@ -2,6 +2,7 @@ package com.mt.newsdemo.utils;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.gson.internal.$Gson$Types;
 import com.squareup.okhttp.Callback;
@@ -160,7 +161,7 @@ public class OkHttpUtil {
         Type mType;
 
         public ResultCallBack() {
-            mType = getSuperclassTypeParameter(getClass());
+//            mType = getSuperclassTypeParameter(getClass());
         }
 
         static Type getSuperclassTypeParameter(Class<?> subclass) {
