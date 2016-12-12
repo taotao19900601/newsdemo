@@ -31,7 +31,7 @@ public class NewsModelImpl implements NewsModel{
         };
         OkHttpUtil.get(url, callBack);
     }
-
+    // 加载详情页
     @Override
     public void loadNewsDetail(String docid, OnLoadNewsListListener listener) {
 
