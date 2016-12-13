@@ -119,6 +119,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         public TextView mTitle;
         public TextView mDesc;
         public ImageView mNewImg;

@@ -161,7 +161,7 @@ public class NewsListFragment extends Fragment implements NewsView, SwipeRefresh
 
     @Override
     public void onItemClick(View view, int position) {
-
+        // item的点击回掉方法 跳转到详情页
 
     }
 }
