@@ -1,5 +1,7 @@
 package com.mt.newsdemo.news.model;
 
+import android.util.Log;
+
 import com.mt.newsdemo.beans.NewsBean;
 import com.mt.newsdemo.commons.Urls;
 import com.mt.newsdemo.news.NewsJsonUtils;
@@ -29,6 +31,7 @@ public class NewsModelImpl implements NewsModel{
             @Override
             public void onFailure(Exception e) {
                 listener.onFailure("请求失败",e);
+                LogUtil.e(TAG,"onFailure"+e);
             }
         };
         OkHttpUtil.get(url, callBack);

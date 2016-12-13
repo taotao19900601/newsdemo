@@ -11,6 +11,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.squareup.okhttp.internal.http.RealResponseBody;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -75,7 +76,7 @@ public class OkHttpUtil {
                     try {
                         if(response == null)
                             return;
-                        String str = response.body().toString();
+                        String str = response.body().string();
                         if (callback.mType == String.class) {
                             sendSuccessCallBack(callback, str);
                         } else {
@@ -98,6 +99,7 @@ public class OkHttpUtil {
             public void run() {
                 if (callback != null) {
                     callback.onSuccess(obj);
+
                 }
             }
         });
@@ -161,7 +163,7 @@ public class OkHttpUtil {
         Type mType;
 
         public ResultCallBack() {
-//            mType = getSuperclassTypeParameter(getClass());
+            mType = getSuperclassTypeParameter(getClass());
         }
 
         static Type getSuperclassTypeParameter(Class<?> subclass) {

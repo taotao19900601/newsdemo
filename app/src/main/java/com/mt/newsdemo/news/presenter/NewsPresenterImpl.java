@@ -56,11 +56,15 @@ public class NewsPresenterImpl implements NewsPresenter, NewsModelImpl.OnLoadNew
 
     @Override
     public void onSuccess(List<NewsBean> list) {
-
+        if(list !=null){
+            mNewsView.hideProgress();
+            mNewsView.addNews(list);
+        }
     }
 
     @Override
     public void onFailure(String msg, Exception e) {
-
+        mNewsView.hideProgress();
+        mNewsView.showLoadFailMsg();
     }
 }
