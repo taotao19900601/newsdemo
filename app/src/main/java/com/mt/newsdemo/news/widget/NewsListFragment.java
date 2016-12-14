@@ -1,8 +1,11 @@
 package com.mt.newsdemo.news.widget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -161,7 +164,16 @@ public class NewsListFragment extends Fragment implements NewsView, SwipeRefresh
 
     @Override
     public void onItemClick(View view, int position) {
-        // item的点击回掉方法 跳转到详情页
+        // item的点击回掉方法 跳转到详情
+        NewsBean news = mNewsAdapter.getItem(position);
+        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+        intent.putExtra("news", news);
 
+        View transitionView = view.findViewById(R.id.ivNews);
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                        transitionView, getString(R.string.transition_news_img));
+
+        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mt.newsdemo.beans.NewsBean;
+import com.mt.newsdemo.beans.NewsDetailBean;
 import com.mt.newsdemo.utils.JsonUtil;
 import com.mt.newsdemo.utils.LogUtil;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 public class NewsJsonUtils {
+    private static final String TAG = "NewsJsonUtils";
 
     public static List<NewsBean> readJsonNewsBeans(String res, String value) {
         List<NewsBean> beans = new ArrayList<>();
@@ -41,6 +43,22 @@ public class NewsJsonUtils {
         }
 
         return beans;
+    }
+
+    public static NewsDetailBean readJsonNewsDetailBeans(String res, String docId) {
+        NewsDetailBean newsDetailBean = null;
+        try {
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObj = parser.parse(res).getAsJsonObject();
+            JsonElement jsonElement = jsonObj.get(docId);
+            if(jsonElement == null) {
+                return null;
+            }
+            newsDetailBean = JsonUtil.deserialize(jsonElement.getAsJsonObject(), NewsDetailBean.class);
+        } catch (Exception e) {
+            LogUtil.e(TAG, "readJsonNewsBeans error"+ e);
+        }
+        return newsDetailBean;
     }
 
 }

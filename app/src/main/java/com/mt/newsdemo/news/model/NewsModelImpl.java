@@ -3,6 +3,7 @@ package com.mt.newsdemo.news.model;
 import android.util.Log;
 
 import com.mt.newsdemo.beans.NewsBean;
+import com.mt.newsdemo.beans.NewsDetailBean;
 import com.mt.newsdemo.commons.Urls;
 import com.mt.newsdemo.news.NewsJsonUtils;
 import com.mt.newsdemo.news.widget.NewsFragment;
@@ -38,12 +39,34 @@ public class NewsModelImpl implements NewsModel{
     }
     // 加载详情页
     @Override
-    public void loadNewsDetail(String docid, OnLoadNewsListListener listener) {
+    public void loadNewsDetail(final String docid, final OnLoadNewsDetailListener listener) {
+        OkHttpUtil.ResultCallBack<String> callBack = new OkHttpUtil.ResultCallBack<String>() {
+            @Override
+            public void onSuccess(String response) {
+                NewsDetailBean newsDetailBean = NewsJsonUtils.readJsonNewsDetailBeans(response, docid);
+                listener.onSuccess(newsDetailBean);
+            }
 
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        };
+        OkHttpUtil.get(getDetailUrl(docid),callBack);
     }
 
+    private String getDetailUrl(String docId) {
+        StringBuffer sb = new StringBuffer(Urls.NEW_DETAIL);
+        sb.append(docId).append(Urls.END_DETAIL_URL);
+        return sb.toString();
+    }
     public interface OnLoadNewsListListener {
         void onSuccess(List<NewsBean> list);
+        void onFailure(String msg, Exception e);
+    }
+
+    public interface OnLoadNewsDetailListener {
+        void onSuccess(NewsDetailBean newsDetailBean);
         void onFailure(String msg, Exception e);
     }
 
