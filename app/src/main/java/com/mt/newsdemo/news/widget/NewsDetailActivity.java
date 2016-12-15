@@ -44,7 +44,7 @@ public class NewsDetailActivity extends SwipeBackActivity implements NewsDetailV
         setContentView(R.layout.activity_news_detail);
         mHtmlTextView = (HtmlTextView) findViewById(R.id.htNewsContent);
         mProgressBar = (ProgressBar) findViewById(R.id.progress);
-        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -61,10 +61,10 @@ public class NewsDetailActivity extends SwipeBackActivity implements NewsDetailV
         mNewsBean = (NewsBean) getIntent().getSerializableExtra("news");
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        if(mNewsBean != null ){
+        if (mNewsBean != null) {
             mCollapsingToolbarLayout.setTitle(mNewsBean.getTitle());
-            ImageLoaderUtil.display(this,(ImageView) findViewById(R.id.ivImage),mNewsBean.getImgsrc());
-            mNewsDetailPresenter = new NewsDetailPresenterImpl(getApplication(),this);
+            ImageLoaderUtil.display(this, (ImageView) findViewById(R.id.ivImage), mNewsBean.getImgsrc());
+            mNewsDetailPresenter = new NewsDetailPresenterImpl(getApplication(), this);
             mNewsDetailPresenter.loadNewsDetail(mNewsBean.getDocid());
         }
 
@@ -72,7 +72,11 @@ public class NewsDetailActivity extends SwipeBackActivity implements NewsDetailV
 
     @Override
     public void showNewsDetialContent(String newsDetailContent) {
-        mHtmlTextView.setHtmlFromString(newsDetailContent, new HtmlTextView.LocalImageGetter());
+        if (newsDetailContent != null) {
+            hideProgress();
+            mHtmlTextView.setHtmlFromString(newsDetailContent, new HtmlTextView.LocalImageGetter());
+        }
+
     }
 
     @Override
@@ -84,11 +88,6 @@ public class NewsDetailActivity extends SwipeBackActivity implements NewsDetailV
     public void hideProgress() {
         mProgressBar.setVisibility(View.GONE);
     }
-
-
-
-
-
 
 
 }

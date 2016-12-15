@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mt.newsdemo.R;
+import com.mt.newsdemo.images.widget.ImageFragment;
 import com.mt.newsdemo.main.presenter.MainPresenter;
 import com.mt.newsdemo.main.presenter.MainPresenterImpl;
 import com.mt.newsdemo.main.view.MainView;
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switch2Images() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new ImageFragment()).commit();
         LogUtil.e(TAG, "switch2Images");
     }
 
