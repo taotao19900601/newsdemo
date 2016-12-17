@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.mt.newsdemo.R;
 import com.mt.newsdemo.beans.ImageBean;
 import com.mt.newsdemo.utils.ImageLoaderUtil;
+import com.mt.newsdemo.utils.ToolsUtil;
 
 import java.util.List;
 
@@ -22,9 +23,16 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<ImageBean> mList;
+    private int mMaxWidth;
+    private int mMaxHeight;
 
     public ImageAdapter(Context context) {
         this.mContext = context;
+        // 获取屏幕的宽度
+        mMaxWidth = ToolsUtil.getWidthInPx(mContext) - 20;
+        // 获取屏幕的高度 减去状态栏的高度 - 96dp
+        mMaxHeight = ToolsUtil.getHeightInPx(mContext) - ToolsUtil.getStatusHeight(mContext) - ToolsUtil.dip2px(mContext, 96);
+
     }
 
     @Override
@@ -41,8 +49,16 @@ public class ImageAdapter extends RecyclerView.Adapter {
                 ImageBean imgItem = mList.get(position);
                 if (imgItem != null) {
                     ((ImageViewHolder) holder).mTextView.setText(imgItem.getTitle());
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(imgItem.getWidth(),imgItem.getHeight());
+                    //**********   重新计算图片的宽和高   **********////
+                    float scale = (float)imgItem.getWidth() / (float) mMaxWidth;
+                    int height = (int)(imgItem.getHeight() / scale);
+                    if(height > mMaxHeight) {
+                        height = mMaxHeight;
+                    }
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mMaxWidth,height);
                     ((ImageViewHolder) holder).mImageView.setLayoutParams(params);
+
+
                     ImageLoaderUtil.display(mContext,((ImageViewHolder) holder).mImageView,imgItem.getThumburl());
 
                 }
