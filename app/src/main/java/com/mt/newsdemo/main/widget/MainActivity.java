@@ -17,6 +17,7 @@ import com.mt.newsdemo.main.presenter.MainPresenterImpl;
 import com.mt.newsdemo.main.view.MainView;
 import com.mt.newsdemo.news.widget.NewsFragment;
 import com.mt.newsdemo.utils.LogUtil;
+import com.mt.newsdemo.weather.widget.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity implements MainView {
     public String TAG = "MainActivity";
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switch2Weather() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new WeatherFragment()).commit();
+
         LogUtil.e(TAG, "switch2Weather");
     }
 
