@@ -32,7 +32,8 @@ public class WeatherPresenterImpl implements WeatherPresenter,WeatherModelImpl.L
         @Override
         public void onSuccess(String cityName) {
             LogUtil.d("WeatherPresenterImpl","获取成功");
-            mWeatherModel.loadWeatherData("" ,WeatherPresenterImpl.this);
+            mWeatherView.setCity(cityName);
+            mWeatherModel.loadWeatherData(cityName ,WeatherPresenterImpl.this);
         }
 
         @Override
@@ -54,7 +55,15 @@ public class WeatherPresenterImpl implements WeatherPresenter,WeatherModelImpl.L
 
     @Override
     public void onSuccess(List<WeatherBean> list) {
-
+        if(list != null && list.size()>0){
+            WeatherBean bean= list.remove(0);
+            mWeatherView.setWeather(bean.getWeather());
+            mWeatherView.setTemperature(bean.getTemperature());
+            mWeatherView.setToday(bean.getDate());
+            mWeatherView.setWind(bean.getWind());
+        }
+        mWeatherView.setWeatherData(list);
+        mWeatherView.hideProgress();
     }
 
     @Override

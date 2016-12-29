@@ -12,6 +12,7 @@ import com.mt.newsdemo.beans.WeatherBean;
 import com.mt.newsdemo.commons.Urls;
 import com.mt.newsdemo.utils.LogUtil;
 import com.mt.newsdemo.utils.OkHttpUtil;
+import com.mt.newsdemo.weather.WeatherJsonUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -26,27 +27,27 @@ public class WeatherModelImpl implements WeatherModel {
 
     @Override
     public void loadWeatherData(String cityName, final LoadWeatherLintener listener) {
-            try{
-                String url = Urls.WEATHER+ URLEncoder.encode(cityName,"UTF-8");
-                OkHttpUtil.get(url, new OkHttpUtil.ResultCallBack<String>() {
-                    @Override
-                    public void onSuccess(String response) {
-                        // 解析json
-                        LogUtil.d(TAG,"11111111111"+response);
-                        // 数据回调
-                        listener.onSuccess(null);
-                    }
+        try {
+            String url = Urls.WEATHER + URLEncoder.encode(cityName, "UTF-8");
+            OkHttpUtil.get(url, new OkHttpUtil.ResultCallBack<String>() {
+                @Override
+                public void onSuccess(String response) {
+                    // 解析json
+                    List<WeatherBean> list = WeatherJsonUtils.getWeatherInfo(response);
+                    // 数据回调
+                    if (listener != null)
+                        listener.onSuccess(list);
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        LogUtil.d(TAG,"222222222"+e);
-                    }
-                });
-            }
-            catch (UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
+                }
 
+                @Override
+                public void onFailure(Exception e) {
+                    LogUtil.d(TAG, "222222222" + e);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -78,11 +79,10 @@ public class WeatherModelImpl implements WeatherModel {
             @Override
             public void onSuccess(String response) {
                 // 将定位到城市的名称回掉到 presenter 中的 onsuccess ()
+                // 解析response
+                String city = WeatherJsonUtils.getCity(response);
                 if (listener != null)
-                    // 解析response
-                LogUtil.e(TAG, response);
-
-                    listener.onSuccess("");
+                    listener.onSuccess(city);
             }
 
             @Override

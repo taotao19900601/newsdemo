@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mt.newsdemo.R;
 import com.mt.newsdemo.beans.WeatherBean;
+import com.mt.newsdemo.utils.LogUtil;
 import com.mt.newsdemo.weather.WeatherJsonUtils;
 import com.mt.newsdemo.weather.presenter.WeatherPresenter;
 import com.mt.newsdemo.weather.presenter.WeatherPresenterImpl;
@@ -87,32 +88,38 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     @Override
     public void setToday(String data) {
-
+        if(mTodayTV != null)
+            mTodayTV.setText(data);
     }
 
     @Override
     public void setTemperature(String temperature) {
-
+        if(mTodayTemperatureTV != null)
+            mTodayTemperatureTV.setText(temperature);
     }
 
     @Override
     public void setWind(String wind) {
-
+        if(mTodayWindTV != null)
+            mTodayWindTV.setText(wind);
     }
 
     @Override
     public void setWeather(String weather) {
-
+        if(mTodayWeatherTV != null)
+            mTodayWeatherTV.setText(weather);
     }
 
     @Override
     public void setWeatherImage(int res) {
+        if(mTodayWeatherImage != null)
+            mTodayWeatherImage.setImageResource(res);
 
     }
 
     @Override
     public void setWeatherData(List<WeatherBean> lists) {
-
+        List<WeatherBean> list = lists;
     }
 
     @Override
