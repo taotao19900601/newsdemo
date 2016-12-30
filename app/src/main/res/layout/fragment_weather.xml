@@ -2,14 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/biz_news_local_weather_bg_big"
+    >
 
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center" />
 
     <LinearLayout
         android:id="@+id/weather_layout"
@@ -29,14 +31,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="beijing"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/icons"
+                />
 
             <TextView
                 android:id="@+id/today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="2016/12/19" />
+                android:text="2016/12/19"
+                android:textColor="@color/icons"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -64,6 +70,7 @@
                     android:text="20~30"
                     android:textSize="15dp"
                     android:layout_marginTop="5dp"
+                    android:textColor="@color/icons"
                     />
 
                 <TextView
@@ -73,6 +80,7 @@
                     android:text="微风"
                     android:textSize="15dp"
                     android:layout_marginTop="5dp"
+                    android:textColor="@color/icons"
                     />
 
                 <TextView
@@ -81,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="阵雨转阴"
                     android:layout_marginTop="5dp"
+                    android:textColor="@color/icons"
                     />
 
             </LinearLayout>

@@ -29,7 +29,7 @@ public class ImageModelImpl implements ImageModel {
 
             @Override
             public void onFailure(Exception e) {
-                listener.onFailure("",e);
+                listener.onFailure("网络错误！",e);
             }
         };
         OkHttpUtil.get(imgUrl,callBack);

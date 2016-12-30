@@ -1,5 +1,8 @@
 package com.mt.newsdemo.images.presenter;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.mt.newsdemo.beans.ImageBean;
 import com.mt.newsdemo.images.model.ImageModel;
 import com.mt.newsdemo.images.model.ImageModelImpl;
@@ -14,10 +17,13 @@ import java.util.List;
 public class ImagePresenterImpl implements ImagePresenter, ImageModelImpl.OnLoadImageList {
     private ImageModel mImageModel;
     private ImageView mImageView;
+    private Context mContext;
 
-    public ImagePresenterImpl(ImageView imageView) {
+    public ImagePresenterImpl(ImageView imageView,Context context) {
         this.mImageView = imageView;
+        this.mContext = context;
         mImageModel = new ImageModelImpl();
+
     }
 
     @Override
@@ -35,6 +41,7 @@ public class ImagePresenterImpl implements ImagePresenter, ImageModelImpl.OnLoad
 
     @Override
     public void onFailure(String msg, Exception e) {
-
+        mImageView.hideProgress();
+        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
     }
 }

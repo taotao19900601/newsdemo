@@ -50,16 +50,16 @@ public class ImageAdapter extends RecyclerView.Adapter {
                 if (imgItem != null) {
                     ((ImageViewHolder) holder).mTextView.setText(imgItem.getTitle());
                     //**********   重新计算图片的宽和高   **********////
-                    float scale = (float)imgItem.getWidth() / (float) mMaxWidth;
-                    int height = (int)(imgItem.getHeight() / scale);
-                    if(height > mMaxHeight) {
+                    float scale = (float) imgItem.getWidth() / (float) mMaxWidth;
+                    int height = (int) (imgItem.getHeight() / scale);
+                    if (height > mMaxHeight) {
                         height = mMaxHeight;
                     }
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mMaxWidth,height);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mMaxWidth, height);
                     ((ImageViewHolder) holder).mImageView.setLayoutParams(params);
 
 
-                    ImageLoaderUtil.display(mContext,((ImageViewHolder) holder).mImageView,imgItem.getThumburl());
+                    ImageLoaderUtil.display(mContext, ((ImageViewHolder) holder).mImageView, imgItem.getThumburl());
 
                 }
             }

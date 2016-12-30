@@ -159,6 +159,7 @@ public class NewsListFragment extends Fragment implements NewsView, SwipeRefresh
         pageIndex = 0;
         if (mData != null)
             mData.clear();
+        LogUtil.e(TAG,"刷新");
         mNewsPresenter.loadNews(mType, pageIndex);
     }
 

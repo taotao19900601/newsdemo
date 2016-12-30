@@ -61,6 +61,7 @@ public class WeatherPresenterImpl implements WeatherPresenter,WeatherModelImpl.L
             mWeatherView.setTemperature(bean.getTemperature());
             mWeatherView.setToday(bean.getDate());
             mWeatherView.setWind(bean.getWind());
+            mWeatherView.setWeatherImage(bean.getImageRes());
         }
         mWeatherView.setWeatherData(list);
         mWeatherView.hideProgress();

@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void switch2Weather() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new WeatherFragment()).commit();
-
         LogUtil.e(TAG, "switch2Weather");
     }
 

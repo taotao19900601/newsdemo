@@ -16,6 +16,7 @@ import com.mt.newsdemo.images.ImageAdapter;
 import com.mt.newsdemo.images.presenter.ImagePresenter;
 import com.mt.newsdemo.images.presenter.ImagePresenterImpl;
 import com.mt.newsdemo.images.view.ImageView;
+import com.mt.newsdemo.utils.LogUtil;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ImageFragment extends Fragment implements ImageView, SwipeRefreshLa
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mImagePresenter = new ImagePresenterImpl(this);
+        this.mImagePresenter = new ImagePresenterImpl(this,getContext());
     }
 
     @Nullable
@@ -50,6 +51,7 @@ public class ImageFragment extends Fragment implements ImageView, SwipeRefreshLa
         mImageAdapter = new ImageAdapter(getContext());
         mRecyclerView.setAdapter(mImageAdapter);
         onRefresh();
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
 
@@ -82,6 +84,7 @@ public class ImageFragment extends Fragment implements ImageView, SwipeRefreshLa
         if (mList != null) {
             mList.clear();
         }
+        LogUtil.e(TAG,"刷新！！！");
         // 请求网络获取最新数据
         mImagePresenter.loadImageList();
     }

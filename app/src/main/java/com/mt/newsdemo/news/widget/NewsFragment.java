@@ -48,7 +48,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void setupViewPager() {
-        MyPagerAdapter mPagerAdapter = new MyPagerAdapter(getFragmentManager());
+        MyPagerAdapter mPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
         mPagerAdapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_TOP),getString(R.string.top));
         mPagerAdapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_NBA),getString(R.string.nba));
         mPagerAdapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_CARS),getString(R.string.cars));

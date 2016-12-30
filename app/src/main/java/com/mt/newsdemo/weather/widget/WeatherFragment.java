@@ -82,44 +82,59 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     @Override
     public void setCity(String city) {
-        if(mCityTV != null)
+        if (mCityTV != null)
             mCityTV.setText(city);
     }
 
     @Override
     public void setToday(String data) {
-        if(mTodayTV != null)
+        if (mTodayTV != null)
             mTodayTV.setText(data);
     }
 
     @Override
     public void setTemperature(String temperature) {
-        if(mTodayTemperatureTV != null)
+        if (mTodayTemperatureTV != null)
             mTodayTemperatureTV.setText(temperature);
     }
 
     @Override
     public void setWind(String wind) {
-        if(mTodayWindTV != null)
+        if (mTodayWindTV != null)
             mTodayWindTV.setText(wind);
     }
 
     @Override
     public void setWeather(String weather) {
-        if(mTodayWeatherTV != null)
+        if (mTodayWeatherTV != null)
             mTodayWeatherTV.setText(weather);
     }
 
     @Override
     public void setWeatherImage(int res) {
-        if(mTodayWeatherImage != null)
+        if (mTodayWeatherImage != null)
             mTodayWeatherImage.setImageResource(res);
 
     }
 
     @Override
     public void setWeatherData(List<WeatherBean> lists) {
-        List<WeatherBean> list = lists;
+        if (lists != null) {
+            for (WeatherBean bean : lists) {
+                View weatherView = LayoutInflater.from(getContext()).inflate(R.layout.item_weather, null);
+                TextView dataTV = (TextView) weatherView.findViewById(R.id.date);
+                dataTV.setText(bean.getDate());
+                ImageView weatherIV = (ImageView) weatherView.findViewById(R.id.weatherImage);
+                weatherIV.setImageResource(bean.getImageRes());
+                TextView tempTV = (TextView) weatherView.findViewById(R.id.weatherTemp);
+                tempTV.setText(bean.getTemperature());
+                TextView windTV = (TextView) weatherView.findViewById(R.id.wind);
+                windTV.setText(bean.getWind());
+                TextView weatherTV = (TextView) weatherView.findViewById(R.id.weather);
+                weatherTV.setText(bean.getWeather());
+                mWeatherContentLayout.addView(weatherView);
+            }
+        }
     }
 
     @Override
